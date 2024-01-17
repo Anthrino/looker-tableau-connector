@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one or more
+  ~ contributor license agreements.  See the NOTICE file distributed with
+  ~ this work for additional information regarding copyright ownership.
+  ~ The ASF licenses this file to you under the Apache License, Version 2.0
+  ~ (the "License"); you may not use this file except in compliance with
+  ~ the License.  You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<connector-plugin class='looker-jdbc' superclass='jdbc' plugin-version='0.0.0' name='Looker JDBC' version='18.1' min-version-tableau='2020.4'>
+  <vendor-information>
+    <company name="Google"/>
+    <support-link url="https://www.looker.com/"/>
+    <driver-download-link url="https://github.com/looker-open-source/calcite-avatica/releases/latest"/>
+  </vendor-information>
+  <connection-customization class="looker-jdbc" enabled="true" version="10.0">
+    <vendor name="Google"/>
+    <driver name="Looker JDBC Driver"/>
+    <customizations>
+      <!-- Tableau was breaking on connection when this was not supressed: -->
+      <customization name="CAP_SUPPRESS_TEMP_TABLE_CHECKS" value="yes"/>
+      <!-- Different from BigQuery: -->
+      <!--customization name="CAP_FAST_METADATA" value="no"/-->
+      <customization name="CAP_QUERY_JOIN_ACROSS_SCHEMAS" value="no"/>
+      <customization name="CAP_QUERY_HAVING_REQUIRES_GROUP_BY" value="yes"/>
+      <!-- Same as BigQuery: -->
+      <customization name="CAP_CREATE_TEMP_TABLES" value="no"/>
+      <customization name="CAP_QUERY_GROUP_BY_ALIAS" value="no"/>
+      <customization name="CAP_QUERY_GROUP_BY_BOOL" value="yes"/>
+      <customization name="CAP_QUERY_GROUP_BY_DEGREE" value="yes"/>
+      <customization name="CAP_QUERY_INCLUDE_GROUP_BY_COLUMNS_IN_SELECT" value="yes"/>
+      <customization name="CAP_QUERY_INOUT_JOINS" value="no"/>
+      <customization name="CAP_QUERY_JOIN_MISMATCHED_VARCHAR_WIDTHS" value="no"/>
+      <customization name="CAP_QUERY_SCALAR_SELECTS_ALL_IN_GROUP_BYS" value="yes"/>
+      <customization name="CAP_QUERY_SORT_BY" value="yes"/>
+      <customization name="CAP_QUERY_SUBQUERIES" value="yes"/>
+      <customization name="CAP_QUERY_TOP_N" value="yes"/>
+      <customization name="CAP_QUERY_TOP_PERCENT" value="no"/>
+      <customization name="CAP_QUERY_TOP_SAMPLE" value="no"/>
+      <customization name="CAP_QUERY_TOP_SAMPLE_PERCENT" value="no"/>
+      <customization name="CAP_SELECT_INTO" value="no"/>
+      <customization name="CAP_SELECT_TOP_INTO" value="no"/>
+      <customization name="CAP_SUPPORTS_UNION" value="no"/>
+      <!-- Semantics still unclear: -->
+      <customization name="CAP_QUERY_ALLOW_PARTIAL_AGGREGATION" value="no"/>
+      <customization name="CAP_QUERY_TIME_REQUIRES_CAST" value="yes"/>
+    </customizations>
+  </connection-customization>
+  <connection-fields file="connectionFields.xml"/>
+  <connection-metadata file="connectionMetadata.xml"/>
+  <connection-resolver file="connectionResolver.tdr"/>
+  <dialect file="dialect.tdd"/>
+  <oauth-config file='oauthConfig.xml'/>
+</connector-plugin>
