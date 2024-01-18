@@ -1,21 +1,24 @@
 #!/bin/bash
 
 # Clone connector-plugin-sdk submodule
+git config --global --add safe.directory '*'
+
 git submodule update --init --recursive
 
+sudo apt install python3.8-venv
 ## Package TACO ##
 
 # Move to connector packager folder
 cd connector-plugin-sdk/connector-packager/
 
 # Create and activate virtual env
-python –m venv .venv
+python3 -m venv .venv
 
 source ./.venv/bin/activate
 
 # Install connector packager
-python setup.py install
+python3 setup.py install
 
-python -m connector_packager.package
+python3 -m connector_packager.package ../../looker-jdbc/
 
 ## Sign TACO ## 
