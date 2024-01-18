@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Clone connector-plugin-sdk submodule
+git submodule update --init --recursive
+
 ## Package TACO ##
 
 # Move to connector packager folder
