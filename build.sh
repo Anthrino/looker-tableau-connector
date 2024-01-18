@@ -21,4 +21,5 @@ python3 setup.py install
 
 python3 -m connector_packager.package ../../looker-jdbc/
 
+ls $KOKORO_ARTIFACTS_DIR/github/looker-tableau-connector/connector-plugin-sdk/connector-packager/packaged-connector
 ## Sign TACO ## 
